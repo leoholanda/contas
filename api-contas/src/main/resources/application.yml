@@ -7,7 +7,7 @@ spring:
       pool-name: plataforma-database-pool
       auto-commit: false
       connection-timeout: 30000
-    url: "jdbc:postgresql://0.0.0.0:5432/contas_a_pagar"
+    url: "jdbc:postgresql://0.0.0.0:5433/contas_a_pagar"
     username: postgres
     password: postgres
     type: com.zaxxer.hikari.HikariDataSource
