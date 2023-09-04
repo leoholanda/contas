@@ -1,0 +1,64 @@
+<h1 align="center">Listagem de Contas</h1>
+
+<mat-table [dataSource]="contas" class="mat-table mat-elevation-z8">
+    <ng-component matColumnDef="nome">
+        <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+        <mat-cell *matCellDef="let conta">{{ conta.nome }}</mat-cell>
+    </ng-component>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Nome do Curso </mat-header-cell>
+        <mat-cell *matCellDef="let course"> {{ course.name }} </mat-cell>
+      </ng-container>
+
+    <ng-component matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let conta">{{ conta.status }}</mat-cell>
+    </ng-component>
+
+    <ng-component matColumnDef="valorOriginal">
+        <mat-header-cell *matHeaderCellDef>Valor</mat-header-cell>
+        <mat-cell *matCellDef="let conta">{{ conta.valorOriginal | currency }}</mat-cell>
+    </ng-component>
+
+    <ng-component matColumnDef="valorCorrigido">
+        <mat-header-cell *matHeaderCellDef>Valor com Correção</mat-header-cell>
+        <mat-cell *matCellDef="let conta">{{ conta.valorCorrigido | currency }}</mat-cell>
+    </ng-component>
+
+    <ng-component matColumnDef="atrasado">
+        <mat-header-cell *matHeaderCellDef>Dias de Atraso</mat-header-cell>
+        <mat-cell *matCellDef="let conta">{{ conta.diasAtrasado }}</mat-cell>
+    </ng-component>
+
+    <ng-component matColumnDef="dataVencimento">
+        <mat-header-cell *matHeaderCellDef>Data de Vencimento</mat-header-cell>
+        <mat-cell *matCellDef="let conta">{{ conta.dataVencimento }}</mat-cell>
+    </ng-component>
+
+    <ng-component matColumnDef="dataPagamento">
+        <mat-header-cell *matHeaderCellDef>Data de Pagamento</mat-header-cell>
+        <mat-cell *matCellDef="let conta">{{ conta.dataPagamento }}</mat-cell>
+    </ng-component>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef class="action-column-header">
+          <button mat-flat-button color="primary"
+            aria-label="Adicionar uma conta" (click)="onAdicionar()">Adicionar
+          </button>
+        </mat-header-cell>
+    
+        <mat-cell *matCellDef="let conta" class=action-column>
+    
+          <button mat-stroked-button color="primary" aria-label="Pagar"
+            (click)="onPagarConta(conta)" [disabled]="conta.status == 'PAGO'">
+            Pagar
+          </button>
+    
+        </mat-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
