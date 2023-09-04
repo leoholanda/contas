@@ -1,4 +1,4 @@
-package com.deliverit.apicontas;
+package com.deliverit.apicontas.controller;
 
 import com.deliverit.apicontas.enums.Status;
 import com.deliverit.apicontas.model.Conta;
@@ -14,13 +14,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contas")
+@CrossOrigin(origins = "*")
 public class ContaController {
 
     @Autowired
     private ContaService contaService;
 
     @PostMapping
-    public ResponseEntity<Conta> create(@RequestBody @Valid Conta conta) {
+    public ResponseEntity<Conta> cadastrarConta(@RequestBody @Valid Conta conta) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(contaService.salvar(conta));
@@ -30,7 +31,7 @@ public class ContaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Conta> findById(@PathVariable Long id) {
+    public ResponseEntity<Conta> buscarPorId(@PathVariable Long id) {
         return contaService.buscarPorId(id)
                 .map(record -> ResponseEntity.ok().body(record))
                 .orElse(ResponseEntity.notFound().build());
