@@ -3,8 +3,8 @@ export interface Conta {
     nome: string,
     valorOriginal: DoubleRange,
     valorCorrigido: DoubleRange,
-    dataVencimento: Date,
-    dataPagamento: Date,
+    dataVencimento: string,
+    dataPagamento: string,
     diasAtrasado: number,
     status: string,
     ativo: boolean

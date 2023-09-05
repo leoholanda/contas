@@ -1,0 +1,29 @@
+mat-card {
+    max-width: 80%;
+    margin: 2em auto;
+    text-align: center;
+}
+
+mat-card-actions {
+    margin: 12px;
+    text-align: center;
+}
+
+mat-form-field {
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+button {
+    margin: 6px;
+    text-align: center;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.min-width {
+    width: 100%;
+    min-width: 150px;
+}

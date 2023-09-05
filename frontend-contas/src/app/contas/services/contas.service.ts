@@ -17,10 +17,18 @@ export class ContasService {
   }
 
   save(conta: Partial<Conta>) {
-    return this.httpClient.post<Conta>(this.API, conta).pipe(first());
+    return this.create(conta);
   }
 
   pay(conta: Conta) {
     return this.httpClient.put(`${this.API}/pago/${conta.id}`, conta).pipe(first());
+  }
+
+  private create(conta: Partial<Conta>) {
+    return this.httpClient.post<Conta>(this.API, conta).pipe(first());
+  }
+
+  private update(conta: Partial<Conta>) {
+    return this.httpClient.put(`${this.API}/${conta.id}`, conta).pipe(first());
   }
 }

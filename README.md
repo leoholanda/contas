@@ -2,7 +2,7 @@
 
 **api-contas**
 
-Na api-contas execute o comando no diretorio database-contas-a-pagar
+Em api-contas no diretorio database-contas-a-pagar execute o comando
 para criar o container de banco de dados
 `docker-compose up -d`
 

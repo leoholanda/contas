@@ -1,4 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+h1,
+h2,
+h3
+{
+  margin: 8px 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+.content {
+    margin-top: 12px !important;
+    max-width: 80%;
+    margin: 2em auto;
+    text-align: center;
+}
+
+.column-flex {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+
+.success-snackbar {
+    background: #80cbc4;
+    color: white;
+    white-space: pre-wrap;
+    font-weight: bold;
+}
+
+.warn-snackbar {
+    background: rgb(234, 234, 117);
+    color: rgb(107, 107, 107);
+    white-space: pre-wrap;
+    font-weight: bold;
+}
+
+.error-snackbar {
+    background: rgb(243, 117, 117);
+    color: white ;
+    white-space: pre-wrap;
+    font-weight: bold;
+}
+
+mat-error {
+    font-size: 14px;
+}
