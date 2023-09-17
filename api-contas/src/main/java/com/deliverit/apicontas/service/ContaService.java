@@ -2,6 +2,10 @@ package com.deliverit.apicontas.service;
 
 import com.deliverit.apicontas.enums.Status;
 import com.deliverit.apicontas.model.Conta;
+import com.deliverit.apicontas.model.multa.CorrecaoPorAtraso;
+import com.deliverit.apicontas.model.multa.MultaPorAtrasoMinimo;
+import com.deliverit.apicontas.model.multa.MultaPorAtrasoSuperiorCincoDias;
+import com.deliverit.apicontas.model.multa.MultaPorAtrasoSuperiorTresDias;
 import com.deliverit.apicontas.repository.ContaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +48,7 @@ public class ContaService {
         if (!conta.isPresent()) {
             return Optional.empty();
         }
-        return Optional.of(this.contaEmAtrasoAplicaCorrecao(conta.get()));
+        return Optional.of(this.aplicarCorrecao(conta.get()));
     }
 
     public Optional<Conta> buscarContaPendente(Long id) {
@@ -61,7 +65,7 @@ public class ContaService {
                 Sort.Direction.ASC,
                 "nome"))
                 .stream()
-                .map(this::contaEmAtrasoAplicaCorrecao)
+                .map(this::aplicarCorrecao)
                 .collect(Collectors.toList());
     }
 
@@ -89,6 +93,17 @@ public class ContaService {
                     .add(multa)
                     .add(juros)
                     .setScale(2, BigDecimal.ROUND_HALF_EVEN));
+
+        return conta;
+    }
+
+    private Conta aplicarCorrecao(Conta conta) {
+        CorrecaoPorAtraso correcaoPorAtraso = new CorrecaoPorAtraso();
+        Long quantidadeDiasEmAtraso = conta.getDataVencimento().until(LocalDate.now(), ChronoUnit.DAYS);
+
+        correcaoPorAtraso.calcular(new MultaPorAtrasoMinimo(), conta, quantidadeDiasEmAtraso);
+        correcaoPorAtraso.calcular(new MultaPorAtrasoSuperiorTresDias(), conta, quantidadeDiasEmAtraso);
+        correcaoPorAtraso.calcular(new MultaPorAtrasoSuperiorCincoDias(), conta, quantidadeDiasEmAtraso);
 
         return conta;
     }
